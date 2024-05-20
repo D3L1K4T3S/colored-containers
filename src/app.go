@@ -11,7 +11,6 @@ func App(in *bufio.Reader, out *bufio.Writer) error {
 		return fmt.Errorf("incorrect matrix input")
 	}
 	solve(matrix)
-	outputMatrix(matrix)
 	if isPossible(matrix) {
 		_, err := fmt.Fprintln(out, "yes")
 		if err != nil {
@@ -50,10 +49,6 @@ func solve(matrix [][]int) {
 			matrix[row2][row1] -= trans
 			matrix[row2][row2] += trans
 			matrix[row1][row2] -= trans
-			fmt.Println()
-			outputMatrix(matrix)
-			fmt.Println(row1, row2)
-			fmt.Println()
 		}
 	}
 }
@@ -92,11 +87,11 @@ func minInt(a, b int) int {
 	return result
 }
 
-func outputMatrix(matrix [][]int) {
-	for i := 0; i < len(matrix); i++ {
-		for j := 0; j < len(matrix)-1; j++ {
-			fmt.Print(matrix[i][j], " ")
-		}
-		fmt.Println(matrix[i][len(matrix[i])-1])
-	}
-}
+//func outputMatrix(matrix [][]int) {
+//	for i := 0; i < len(matrix); i++ {
+//		for j := 0; j < len(matrix)-1; j++ {
+//			fmt.Print(matrix[i][j], " ")
+//		}
+//		fmt.Println(matrix[i][len(matrix[i])-1])
+//	}
+//}
