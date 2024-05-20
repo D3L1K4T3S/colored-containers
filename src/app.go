@@ -44,12 +44,16 @@ func isPossible(matrix [][]int) bool {
 func solve(matrix [][]int) {
 	var trans int
 	for row1 := 0; row1 < len(matrix); row1++ {
-		for row2 := 0; row2 < len(matrix); row2++ {
+		for row2 := row1 + 1; row2 < len(matrix); row2++ {
 			trans = minInt(matrix[row2][row1], matrix[row1][row2])
 			matrix[row1][row1] += trans
 			matrix[row2][row1] -= trans
 			matrix[row2][row2] += trans
 			matrix[row1][row2] -= trans
+			fmt.Println()
+			outputMatrix(matrix)
+			fmt.Println(row1, row2)
+			fmt.Println()
 		}
 	}
 }
@@ -70,7 +74,7 @@ func readMatrix(in *bufio.Reader) [][]int {
 	for i := 0; i < n; i++ {
 		for j := 0; j < n; j++ {
 			_, err = fmt.Fscan(in, &matrix[i][j])
-			if err != nil {
+			if err != nil || matrix[i][j] < 0 {
 				return nil
 			}
 		}
